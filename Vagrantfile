@@ -1,9 +1,12 @@
+options = {}
+options[:shared_dir] = ENV['SHARED_DIR'] || '~/projects/'
+
 Vagrant.configure("2") do |config|
 
   config.vm.box      = 'precise32'
   config.vm.box_url  = 'http://files.vagrantup.com/precise32.box'
 
-  config.vm.synced_folder "~/projects/", "/home/vagrant/projects/"
+  config.vm.synced_folder options[:shared_dir], "/home/vagrant/projects/"
 
   config.vm.provider :virtualbox do |vb|
     vb.customize ["modifyvm", :id, "--memory", "2048"]
